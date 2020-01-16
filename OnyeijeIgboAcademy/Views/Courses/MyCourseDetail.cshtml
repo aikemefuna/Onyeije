@@ -1,0 +1,160 @@
+﻿@model OnyeijeIgboAcademy.Models.Course
+@{
+    ViewData["Title"] = "MyCourseDetail";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+<div class="header header-dark bg-primary pb-6 content__title content__title--calendar">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6">
+                    <h6 class="fullcalendar-title h2 text-white d-inline-block mb-0">@Model.CourseTitle</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-lg-inline-block ml-lg-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-action="StudentDashboard" asp-controller="Dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-action="MyCourses" asp-controller="Courses">View your Course Subscriptions</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">@Model.CourseTitle</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<h3 style="font-size:larger;" >&nbsp;&nbsp;>>>&nbsp;&nbsp;Great! Total Course Duration  <span style="color:orangered">@ViewBag.duration   </span>Course</h3>
+<br />
+<div class="row">
+    <div class="container-fluid">
+        <h3 style="font-size:larger; color:blueviolet">&nbsp;&nbsp;&nbsp;&nbsp;Course topics</h3> <br />
+        <div class="row">
+            <div class="col-sm-4">
+
+
+
+                <div class="bs-example">
+                    <div class="accordion" id="accordionExample">
+
+                        <div class="card">
+                            @*@foreach (var module in ViewBag.Modules)
+        {
+
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne_@module.ModuleId">@module.Title</button>
+                   <input type="hidden" value="@module.ModuleId" id="moduleId"/>
+                </h2>
+            </div>
+
+
+
+
+
+            @foreach (var topic in ViewBag.moduleTopics)
+            {
+                <div id="collapseOne_@module.ModuleId" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+
+                        <a asp-action="StartTopic" asp-controller="Topics" asp-route-id="@topic.TopicId" class="nav-link">@topic.Title</a> <br />
+
+                    </div>
+                </div>
+            }
+        }*@
+                            @*@if (ViewBag.TopicCompleted == "Yes")
+                            {
+                            <div>
+                                <h4>Congratulations you have completed all Topics in these Course</h4> <br /> <br /> <br /> 
+                                <a asp-action="MyCourseTopics" asp-controller="Topics" asp-route-id="@Model.CourseId" class="alert-link">View Completed Topics</a> <br />
+                            </div>
+                               
+                            }
+                            else
+                            {*@
+                                @*<h5 style="font-family:'Lucida Handwriting'; font-size:larger; color:blueviolet">Bravo! You have  <span style="color:orangered">@ViewBag.TopicCount <span>Topics </span>    </span>Left for this Course</h5>*@
+                    
+                            <div class="card-title">
+                                <h3 font-size:larger; color:blueviolet"> &nbsp;&nbsp;&nbsp;&nbsp;View your topic List</h3>
+                            </div>
+                                <br />
+                            <br />
+                            <br />
+                            <ul>
+                                    @foreach (var item in ViewBag.Alltopics)
+                                    {
+                                <li>
+
+
+                                        <a asp-action="StartTopic" asp-controller="Topics" asp-route-id="@item.TopicId" class="nav-link">@item.Title</a> 
+                                </li>
+                                    }
+
+                            </ul>
+                             
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-5">
+
+                @if (ViewBag.courseIntro == null)
+                {
+                    <h5>Course Preview</h5>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" allowfullscreen></iframe>
+                    </div>
+                }
+                else
+                {
+                    <h5>Course Preview</h5>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="~/videos/@ViewBag.courseIntro" allowfullscreen></iframe>
+                    </div>
+                }
+
+            </div>
+            @if (ViewBag.NoFile == "Yes")
+            {
+                <div class="col-md-3">
+                    <h5 style="font-family:'Goudy Old Style'; font-size:larger; color:blueviolet">No Course Materials</h5> <br />
+                </div>
+
+
+
+
+            }
+            else
+            {
+                <div class="col-md-3">
+                    <h3 font-size:larger; color:blueviolet">Course Files, Click to download</h3> <br />
+
+                    <ul >
+                        @foreach (var file in ViewBag.Files)
+                        {
+
+                            <li class="nav-item">
+
+                                <a href="~/topicFiles/@file" download>@file</a>
+                            </li>
+                        }
+
+                    </ul>
+
+                </div>
+            }
+
+            <!-- /col -->
+        </div>
+        <!-- /row -->
+        <div class="row">
+
+        </div>
+    </div>
+
+</div>

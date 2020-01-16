@@ -1,0 +1,171 @@
+﻿@model OnyeijeIgboAcademy.Models.Student
+
+@{
+    ViewData["Title"] = "UpdatedStudentProfile";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+
+
+<div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url(~/images/onyeijemedia/logo2.png); background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-default opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+            <div class="col-lg-7 col-md-10">
+                <h1 class="display-2 text-white">Hello @Model.FullName Your Profile has been updated</h1>
+                <p class="text-white mt-0 mb-5"> You can see the progress you've made with your Course and View your assignments</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col-xl-4 order-xl-2">
+            <div class="card card-profile">
+                <img src="../../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 order-lg-2">
+                        <div class="card-profile-image">
+                            <a href="#">
+                                <img src="~/uploads/@Model.ProfilePics" class="rounded-circle">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body pt-0">
+
+                    <div class="text-center">
+
+                        <h5 class="h3">
+
+                            @ViewBag.Name<span class="font-weight-light"></span>
+                        </h5>
+
+
+
+
+                        <div class="h5 font-weight-300">
+                            <i class="ni location_pin mr-2"></i>@ViewBag.Country
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xl-8 order-xl-1">
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                      
+
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <h6 class="heading-small text-muted mb-4">User information</h6>
+                    <div class="pl-lg-4">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-username">FirstName</label>
+                                    <input asp-for="StudentFirstName" id="input-first-name" class="form-control" placeholder="First Name" readonly>
+                                    <span asp-validation-for="StudentFirstName" class="text-red"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-Last-name">Last Name</label>
+                                    <input asp-for="StudentLastName" id="input-Last-name" class="form-control" placeholder="Last Name" readonly>
+                                    <span asp-validation-for="StudentLastName" class="text-red"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-email">Email*</label>
+                                    <input asp-for="StudentEmail" id="input-email" class="form-control" placeholder="Email" readonly>
+                                    <span asp-validation-for="StudentEmail" class="text-red"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-last-name">Phone Number</label>
+                                    <input asp-for="PhoneNumber" id="input-phone" class="form-control" placeholder="Phone Number" readonly>
+                                    <span asp-validation-for="PhoneNumber" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="gender">Gender</label>
+                                    <select asp-for="Gender" class="form-control" id="gender" disabled>
+                                        <option selected>Please Select</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr class="my-4" />
+                    <!-- Address -->
+                    <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                    <div class="pl-lg-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-address">Address *</label>
+                                    <input id="input-address" asp-for="Address" class="form-control" placeholder="Home Address" required readonly>
+                                    <span asp-validation-for="Address" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="countryselect">Country *</label>
+                                    <select class="selectpicker countrypicker form-control" id="countryselect"
+                                            data-live-search="true"
+                                            data-default="Nigeria"
+                                            data-flag="true" required asp-for="Country" disabled>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-city">State/City*</label>
+                                    <input asp-for="State" id="input-city" class="form-control" placeholder="State or City" required readonly>
+                                    <span asp-validation-for="State" class="text-purple"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-country">Postal code</label>
+                                    <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+                    </div>
+                    <hr class="my-4" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

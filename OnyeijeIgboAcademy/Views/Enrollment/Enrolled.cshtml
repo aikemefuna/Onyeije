@@ -1,0 +1,158 @@
+﻿@model OnyeijeIgboAcademy.Models.Course
+@{
+    ViewData["Title"] = "Enrolled";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    var studentId = ViewBag.studentId;
+}
+<link href="~/css/style.css" rel="stylesheet">
+<link href="~/css/vendors.css" rel="stylesheet">
+<link href="~/css/icon_fonts/css/all_icons.min.css" rel="stylesheet">
+
+<!-- YOUR CUSTOM CSS -->
+<link href="~/css/custom.css" rel="stylesheet">
+<link href="~/css/skins/square/grey.css" rel="stylesheet">
+<link href="~/css/wizard.css" rel="stylesheet">
+<!-- MODERNIZR SLIDER -->
+<script src="~/js/modernizr_slider.js"></script>
+<div class="header header-dark bg-primary pb-6 content__title content__title--calendar">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6">
+                    <h6 class="fullcalendar-title h2 text-white d-inline-block mb-0">You have Enrolled for this Course</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-lg-inline-block ml-lg-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-action="StudentDashboard" asp-controller="Dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-action="CourseEnrolled" asp-controller="Courses" asp-route-id="@Model.CourseId">Take me to Course</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">You have Enrolled for this Course</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@*
+    <div class="container-fluid mt--6">
+        <div class="row card-wrapper">
+
+            <div class="col-lg-12">
+                <!-- Pricing -->
+                <div class="card card-pricing bg-gradient-success border-0 text-center mb-4">
+                    <div class="card-header bg-transparent">
+                        <h4 class="text-uppercase ls-1 text-white py-3 mb-0">@Model.CourseTitle</h4>
+                    </div>
+                    <div class="card-body px-lg-7">
+                        @if (Model.IsFree != true)
+                        {
+                            <div class="display-2 text-white">Discounted Prize @Model.Cost</div>
+                            <span class=" text-white">Former Prize 30000</span>
+
+
+                        }
+                        else
+                        {
+                            <div class="display-2 text-white">FREE</div>
+
+                        }
+                        <ul class="list-unstyled my-4">
+                            <li>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="icon icon-xs icon-shape bg-white shadow rounded-circle">
+                                            <i class="fas fa-terminal"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="pl-2 text-sm text-white">Complete documentation</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="icon icon-xs icon-shape bg-white shadow rounded-circle">
+                                            <i class="fas fa-pen-fancy"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="pl-2 text-sm text-white">Course Materials Available</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="icon icon-xs icon-shape bg-white shadow rounded-circle">
+                                            <i class="fas fa-hdd"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="pl-2 text-sm text-white">2GB cloud storage</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <a asp-action="Enroll" asp-controller="Enrollment" asp-route-id="@Model.CourseId" class="btn btn-primary mb-3">Enroll now</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+*@
+<br />
+<br />
+
+<div class="container margin_60_35">
+    <div class="row">
+        <!-- /col -->
+
+        <aside class="col-lg-6" id="sidebar">
+            <div class="box_detail">
+                <figure>
+                    <i class="arrow_triangle-right"></i><img src="~/uploads/@Model.ImageUrl" style="width:100%;height:auto"  alt="" class="img-fluid">
+                </figure>
+                @if (Model.IsFree != true)
+                {
+                    <div class="price">
+                        @Model.Cost
+                    </div>
+                }
+                else
+                {
+                    <div class="price">
+                        FREE
+                    </div>
+                }
+
+                <a asp-action="MyCourseDetail" asp-controller="Courses" asp-route-id="@Model.CourseId" class="btn_1 full-width">Enrolled, Take me to Course</a>
+                <div id="list_feat">
+                    <h3>What's included</h3>
+                    <ul>
+                        <li><i class="icon_mobile"></i>Mobile support</li>
+                        <li><i class="icon_archive_alt"></i>Lesson archive</li>
+                        <li><i class="icon_chat_alt"></i>Tutor chat</li>
+                        <li><i class="icon_document_alt"></i>Course certificate (Coming Soon)</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <div class="col-lg-6">
+
+            <section id="description" >
+                <h2>Congratulations</h2>
+                <img src="~/images/onyeijemedia/EmailConfirmSuccess.gif" style="width:100%;height:auto"  alt="" class="img-fluid" />
+                <p style="color:blueviolet">Your have enrolled for this course, click on take me to course to either start or continue course</p>
+              
+
+            </section>
+
+        </div>
+    </div>
+
+    <!-- /row -->
+</div>

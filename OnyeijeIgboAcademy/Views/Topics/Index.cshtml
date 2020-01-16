@@ -1,0 +1,139 @@
+﻿@model IEnumerable<OnyeijeIgboAcademy.Models.Topic>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Create Topic</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-action="AdminDashboard" asp-controller="Dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-controller="Topics" asp-action="Index">Topics</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Topic</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a asp-action="Create" asp-controller="Topics" class="btn btn-sm btn-neutral">Create New</a>
+                    <a asp-action="Create" asp-controller="Courses" class="btn btn-sm btn-neutral">Create Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid mt--6">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+
+            <div class="card">
+                <!-- Card header -->
+                <div class="card-header">
+                    <h3 class="mb-0">Topics</h3>
+                    @*<p class="text-sm mb-0">
+                            This is an exmaple of datatable using the well known datatables.net plugin. This is a minimal setup in order to get started fast.
+                        </p>*@
+                </div>
+                <div class="table-responsive py-4">
+                    <table class="table table-flush" id="datatable-buttons">
+                        <thead class="thead-light">
+                            <tr>
+
+                                <th> Title</th>
+
+                                <th>Video Url</th>
+                                <th>Module</th>
+
+                                <th>Status</th>
+                                <th>Video Duration</th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                              
+                                <th> Title</th>
+                           
+                                <th>Video Url</th>
+                                <th>Module</th>
+                              
+                                <th>Status</th>
+                                <th>Video Duration</th>
+                                
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    
+                                    <td>  @Html.DisplayFor(modelItem => item.Title)</td>
+                                   
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VideoUrl) <br />
+                                        <video controls="controls" style="width:225px">
+                                            <source src="~/videos/@item.VideoUrl" type="video/mp4" />
+                                        </video>
+                                    </td>
+                                    <td>  @Html.DisplayFor(modelItem => item.Modules.Title)</td>
+                                    <td>
+                                        @if (item.IsEnabled == true)
+                                        {
+                                            <button class="btn btn-success">
+                                                <span class="btn-label">
+                                                    <i class="nc-icon nc-check-2"></i>
+                                                </span>
+                                                Enabled
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-pinterest">
+                                                <span class="btn-label">
+                                                    <i class="nc-icon nc-simple-remove"></i>
+                                                </span> Disabled
+                                            </button>
+                                        }
+                                    </td>
+                                  
+                                    <td>@Html.DisplayFor(modelItem => item.Duration)</td>
+
+                                    <td class="text-right">
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.TopicId">Update</a>
+                                                <a class="dropdown-item" asp-action="UploadTopicFiles" asp-route-id="@item.TopicId">View Course Topic</a>
+                                                <form method="post" asp-controller="Topics" asp-action="Delete" asp-route-id="@item.TopicId">
+                                                    <button class="dropdown-item" type="submit" onclick="return confirm('Are you sure you want to delete the Topic @item.Title')">Delete</button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+﻿@model IEnumerable<OnyeijeIgboAcademy.Models.StCourseEnrollment>
+
+@{
+    ViewData["Title"] = "Course Enrollments reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var rowindex = 1;
+}
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Courses Enrollment Report</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item" aria-current="page"></li>
+                            <li class="breadcrumb-item active" aria-current="page">Course Enrollment Report</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+
+            <div class="card">
+                <!-- Card header -->
+                <div class="card-header">
+                    <h3 class="mb-0">Courses Report</h3>
+                    @*<p class="text-sm mb-0">
+                            This is an exmaple of datatable using the well known datatables.net plugin. This is a minimal setup in order to get started fast.
+                        </p>*@
+                </div>
+                <div class="table-responsive py-4">
+                    <table class="table table-flush" id="datatable-buttons">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>S/N</th>
+                                <th>Course Code</th>
+                                <th>Student Name</th>
+                                <th>Amount Paid</th>
+                                
+
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>S/N</th>
+                                <th>Course Code</th>
+                                <th>Student Name</th>
+                                <th>Amount Paid</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @(rowindex++)
+                                    </td>
+                                   
+                                    <td>  @Html.DisplayFor(modelItem => item.Courses.CourseCode)</td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Student.FullName)
+                                    </td>
+                                    <td>
+                                        @if (item.Courses.IsFree == true)
+                                        {
+                                            <button class="btn btn-success">
+                                                <span class="btn-label">
+                                                    <i class="nc-icon nc-check-2"></i>
+                                                </span>
+                                                Free
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            @Html.DisplayFor(modelItem => item.Courses.Cost)
+                                        }
+                                    </td>
+                                   
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateCreated)
+                                    </td>
+
+
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

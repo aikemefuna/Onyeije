@@ -1,0 +1,164 @@
+﻿@model OnyeijeIgboAcademy.Models.Student
+
+@{
+    ViewData["Title"] = "InstructorProfile";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col-xl-4 order-xl-2">
+            <div class="card card-profile">
+                <img src="../../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 order-lg-2">
+                        <div class="card-profile-image">
+                            <a href="#">
+                                <img src="~/images/onyeijemedia/profile.png" class="rounded-circle">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+              
+                <div class="card-body pt-0">
+                    
+                    <div class="text-center">
+                      
+                            <h5 class="h3">
+
+                                @ViewBag.Name<span class="font-weight-light"></span>
+                            </h5>
+                        
+
+                     
+                        
+                            <div class="h5 font-weight-300">
+                                <i class="ni location_pin mr-2"></i>@ViewBag.Country
+                            </div>
+                        
+
+
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        <div class="col-xl-8 order-xl-1">
+           
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">Edit profile </h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="StudentProfile" asp-controller="Profile">
+                        <h6 class="heading-small text-muted mb-4">User information</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-username">FirstName</label>
+                                        <input asp-for="StudentFirstName" id="input-first-name" class="form-control" placeholder="First Name">
+                                        <span asp-validation-for="StudentFirstName" class="text-red"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-Last-name">Last Name</label>
+                                        <input asp-for="StudentLastName" id="input-Last-name" class="form-control" placeholder="Last Name">
+                                        <span asp-validation-for="StudentLastName" class="text-red"></span>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-email">Email*</label>
+                                        <input asp-for="StudentEmail" id="input-email" class="form-control" placeholder="Email">
+                                        <span asp-validation-for="StudentEmail" class="text-red"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-last-name">Phone Number</label>
+                                        <input asp-for="PhoneNumber" id="input-phone" class="form-control" placeholder="Phone Number">
+                                        <span asp-validation-for="PhoneNumber" class="text-red"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="gender">Gender</label>
+                                        <select asp-for="Gender" class="form-control" id="gender">
+                                            <option selected>Please Select</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr class="my-4" />
+                        <!-- Address -->
+                        <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-address">Address *</label>
+                                        <input id="input-address" asp-for="Address" class="form-control" placeholder="Home Address" required>
+                                        <span asp-validation-for="Address" class="text-red"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="countryselect">Country *</label>
+                                        <select class="selectpicker countrypicker form-control" id="countryselect"
+                                                data-live-search="true"
+                                                data-default="Nigeria"
+                                                data-flag="true" required asp-for="Country">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-city">State/City*</label>
+                                        <input asp-for="State" id="input-city" class="form-control" placeholder="State or City" required>
+                                        <span asp-validation-for="State" class="text-purple"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-country">Postal code</label>
+                                        <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input class="custom-control-input" id="customCheck2" asp-for="Declaration" checked>
+                                <label class="custom-control-label" for="customCheck2">Declaration</label>
+                                <pre> I Declare that all the information provided above are correct and are mine.
+                                </pre>
+                            </div>
+                        </div>
+                        <hr class="my-4" />
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Update Profile</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

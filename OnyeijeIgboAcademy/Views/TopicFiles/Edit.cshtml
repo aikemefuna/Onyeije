@@ -1,0 +1,135 @@
+﻿@model OnyeijeIgboAcademy.Models.TopicFiles
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Upload topic Files</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-controller="Topics" asp-action="Create">Create Topic</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Upload topic Files</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a asp-controller="Topics" asp-action="Index" class="btn btn-sm btn-neutral">View List of Topics</a>
+                    <a asp-controller="Modules" asp-action="Index" class="btn btn-sm btn-neutral">View List of Modules</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <div class="row">
+
+            <div class="col-lg-8">
+                <div class="card-wrapper">
+                    <!-- Input groups -->
+
+                    <div class="card">
+                        <!-- Card header -->
+                        <div class="card-header">
+                            <h3 class="mb-0">Upload topic Files</h3>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="input-group-prepend">
+                                            <label class="form-control-label" for="exampleFormControlSelect1">Select Topic</label>
+                                            <select asp-for="TopicId" class="form-control" id="exampleFormControlSelect1" asp-items="ViewBag.TopicId" required>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single -->
+                            <!-- Multiple -->
+                            <div class="dropzone dropzone-multiple" data-toggle="dropzone" data-dropzone-multiple data-dropzone-url="http://">
+                                <div class="fallback">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFileUploadMultiple" multiple>
+                                        <label class="custom-file-label" for="customFileUploadMultiple">Choose file</label>
+                                    </div>
+                                </div>
+                                <ul class="dz-preview dz-preview-multiple list-group list-group-lg list-group-flush">
+                                    <li class="list-group-item px-0">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <div class="avatar">
+                                                    <img class="avatar-img rounded" src="...html" alt="..." data-dz-thumbnail>
+                                                </div>
+                                            </div>
+                                            <div class="col ml--3">
+                                                <h4 class="mb-1" data-dz-name>...</h4>
+                                                <p class="small text-muted mb-0" data-dz-size>...</p>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="dropdown">
+                                                    <a href="#" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fe fe-more-vertical"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a href="#" class="dropdown-item" data-dz-remove>
+                                                            Remove
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+<script>
+    let jdQuill = new Quill('#description', {
+        theme: 'snow'
+    });
+    function handleSubmit() {
+        console.info('handleSubmit called');
+        document.getElementById('jdr').value = jdQuill.root.innerHTML;
+    };
+</script>
+
+@*<script>
+        $("#formButton").change(function(){
+            $("#form1").toggle();
+        });
+    </script>*@
+
+<script>
+    function myFunction() {
+        if ($('#formButton').prop('checked')) {
+            $('#form1').hide();
+        }
+        else {
+            $('#form1').show();
+        }
+}
+</script>

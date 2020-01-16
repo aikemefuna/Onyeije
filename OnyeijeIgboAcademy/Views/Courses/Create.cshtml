@@ -1,0 +1,247 @@
+﻿@model OnyeijeIgboAcademy.Models.Course
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Create Course</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-controller="Courses" asp-action="Index">Courses</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create course</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a href="#" class="btn btn-sm btn-neutral">Create Topic</a>
+                    <a href="#" class="btn btn-sm btn-neutral">Create Module</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card-wrapper">
+                    <!-- Input groups -->
+
+                    <div class="card">
+                        <!-- Card header -->
+                        <div class="card-header">
+                            <h3 class="mb-0">Create Course module</h3>
+                        </div>
+                        <!-- Card body -->
+                        <div class="card-body">
+
+                            <!-- Input groups with icon -->
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <div class="input-group-prepend">
+                                            <label class="form-control-label" for="exampleFormControlSelect1">Course Difficulty Level</label>
+                                            <select asp-for="DifficultyLevelId" class="form-control" id="exampleFormControlSelect1" asp-items="ViewBag.DifficultyLevelId" required>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <input asp-for="CourseCode" class="form-control" placeholder="Course Code">
+                                            <span asp-validation-for="CourseCode" class="text-danger"></span>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <input asp-for="CourseTitle" class="form-control" placeholder="Course Title">
+                                            <span asp-validation-for="CourseCode" class="text-danger"></span>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br />
+                            <div class="row">
+                                <div class="col-3">
+                                    Enable Course
+                                    <label class="custom-toggle">
+                                        <input type="checkbox" asp-for="IsEnabled">
+                                        <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+
+                                    </label>
+                                </div>
+
+                                <div class="col-3">
+                                    Make Course Free
+                                    <label class="custom-toggle">
+                                        <input type="checkbox" asp-for="IsFree" id="formButton" onchange="myFunction()">
+                                        <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+
+                                    </label>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row" id="form1">
+                                <div class="col-md-6" id="form1">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <input asp-for="Cost" class="form-control" placeholder="Amount" id="form1">
+
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" for="exampleFormControlTextarea1">Course Description</label>
+                                <textarea asp-for="Description" class="form-control" id="summernote"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="row">
+
+                                <div class="input-group mb-5">
+                                    <div class="custom-file">
+                                        Upload Course Preview video
+                                        <input type="file" asp-for="CoursePreviewUrl" style="opacity:1" class="custom-file-input" id="inputGroupFile02" onchange="checkVideo(this)" /> <br />
+
+                                    </div>
+                                    <div id="photoLabel" class="text-danger"></div>
+                                    <br />
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="input-group mb-5">
+                                <div class="custom-file">
+                                    Upload Course Image
+                                    <input type="file" asp-for="ImageUrl" style="opacity:1" class="custom-file-input " id="inputGroupFile02" onchange="checkPhoto(this)" /> <br />
+
+                                </div>
+                                <div id="photoLabels" class="text-red"></div>
+                                <br />
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+<script>
+    let jdQuill = new Quill('#description', {
+        theme: 'snow'
+    });
+    function handleSubmit() {
+        console.info('handleSubmit called');
+        document.getElementById('jdr').value = jdQuill.root.innerHTML;
+    };
+</script>
+
+@*<script>
+        $("#formButton").change(function(){
+            $("#form1").toggle();
+        });
+    </script>*@
+
+<script>
+    function myFunction() {
+        if ($('#formButton').prop('checked')) {
+            $('#form1').hide();
+        }
+        else {
+            $('#form1').show();
+        }
+    }
+</script>
+<script>
+    function checkVideo(target) {
+        if (target.files[0].type.indexOf("video") == -1) {
+            document.getElementById("photoLabel").innerHTML = "File not supported";
+            return false;
+        }
+        //if (target.files[0].size > 20480) {
+        //    document.getElementById("photoLabel").innerHTML = "Image too big (max 20kb)";
+        //    return false;
+        //}
+
+
+
+
+        document.getElementById("photoLabel").innerHTML = "";
+        return true;
+    }
+</script>
+
+<script>
+    function checkPhoto(target) {
+
+        if (target.files[0].size > 102400) {
+            document.getElementById("photoLabels").innerHTML = "Image too big (max 100kb)";
+            return false;
+        }
+
+
+
+
+        document.getElementById("photoLabels").innerHTML = "Image is good to go";
+        return true;
+    }
+</script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
+
+
+
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Enter Notes for the topic Here,  you can either paste an already formatted word text or use the text format navigation',
+        tabsize: 2,
+        height: 600
+    });
+</script>
+
+}
+

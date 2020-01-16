@@ -1,0 +1,189 @@
+﻿@model OnyeijeIgboAcademy.Models.Questions
+@{
+    ViewData["Title"] = "CreateTopicQuiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Edit Topic Question</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-action="AdminDashboard" asp-controller="Dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-controller="Topics" asp-action="Index">Topics</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Topic Questions</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <form method="post" asp-action="EditTopicQuiz">
+        <input type="hidden" asp-for="QuestId" />
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card-wrapper">
+                    <!-- Input groups -->
+
+                    <div class="card">
+                        <!-- Card header -->
+                        <div class="card-header">
+                            <h3 class="mb-0">Edit Topic Questions</h3>
+                        </div>
+                        <!-- Card body -->
+                        <div class="card-body">
+
+                            <div class="form-group">
+                                <label class="form-control-label" for="exampleFormControlTextarea1">Topic Notes</label>
+                                <textarea asp-for="Question" class="form-control" id="summernote"></textarea>
+                                <span asp-validation-for="Question" class="text-danger"></span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="example4cols1Input">Option 1</label>
+                                        <input asp-for="Option1" class="form-control" id="example4cols1Input" placeholder="Option A">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="example4cols2Input">One of four cols</label>
+                                        <input asp-for="Option2" class="form-control" id="example4cols2Input" placeholder="Option B">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="example4cols3Input">One of four cols</label>
+                                        <input asp-for="Option3" class="form-control" id="example4cols3Input" placeholder="Option C">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="example4cols3Input">One of four cols</label>
+                                        <input asp-for="Option4" class="form-control" id="example4cols3Input" placeholder="Option D">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8 col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="example4cols1Input">One of four cols</label>
+                                        <input asp-for="RightAnswer" class="form-control" id="example4cols1Input" placeholder="Right Answer goes here...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group-prepend">
+                                            <label class="form-control-label" for="exampleFormControlSelect1">Select Course</label>
+                                            <select asp-for="Course" asp-items="@ViewBag.CourseId" class="custom-select custom-select-md lg-3" id="CourseId" required>
+                                                <option selected>Please Select</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group-prepend">
+                                            <label class="form-control-label" for="exampleFormControlSelect1">Select Module</label>
+                                            <select asp-for="Module" asp-items='@ViewBag.ModuleId' id="ModuleId" class="custom-select custom-select-lg mb-3" required>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group-prepend">
+                                            <label class="form-control-label" for="exampleFormControlSelect1">Select Module</label>
+                                            <select asp-for="TopicId" asp-items='@ViewBag.TopicId' id="TopicId" class="custom-select custom-select-lg mb-3"></select>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+@*<div class="custom-control custom-radio mb-3">
+        <input name="custom-radio-1" class="custom-control-input" id="customRadio5" type="radio">
+        <label class="custom-control-label" for="customRadio5">Unchecked</label>
+    </div>
+    <div class="custom-control custom-radio mb-3">
+        <input name="custom-radio-1" class="custom-control-input" id="customRadio6" checked="" type="radio">
+        <label class="custom-control-label" for="customRadio6">Checked</label>
+    </div>*@
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
+
+
+
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Type your question. You can also copy and paste already formatted text in the text box',
+        tabsize: 2,
+        height: 300
+    });
+</script>
+<script>
+    $(function () {
+        $('#CourseId').change(function () {
+            var url = '@Url.Content("~/")' + "Quiz/getModulebyId";
+            var ddlsource = "#CourseId";
+            $.getJSON(url, { Id: $(ddlsource).val() }, function (data) {
+                var items = "";
+                $('#ModuleId').empty();
+                $.each(data, function (i, row) {
+                    items += "<option value= '" + row.value + "'>" + row.text + "</option>";
+                });
+                $('#ModuleId').html(items);
+            });
+        });
+    });
+
+
+</script>
+<script>
+    $(function () {
+        $('#ModuleId').change(function () {
+            var url = '@Url.Content("~/")' + "Quiz/getTopicbyId";
+            var ddlsource = "#ModuleId";
+            $.getJSON(url, { Id: $(ddlsource).val() }, function (data) {
+                var items = "";
+                $('#TopicId').empty();
+                $.each(data, function (i, row) {
+                    items += "<option value= '" + row.value + "'>" + row.text + "</option>";
+                });
+                $('#TopicId').html(items);
+            });
+        });
+    });
+
+
+</script>

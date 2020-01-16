@@ -1,0 +1,51 @@
+﻿
+
+
+
+
+@{
+    ViewData["Title"] = "RegisterSuccess";
+    Layout = "_FrontEndLayout";
+    var returnUrl = ViewBag.returnUrl;
+}
+<section id="hero_in" class="cart_section">
+    <div class="wrapper">
+        <div class="container">
+            <div class="bs-wizard clearfix">
+                <center>
+                    <h5 class="text-center"></h5>
+                </center>
+                 <div id="confirm">
+                <h4>Email Confirmation Successful</h4>
+                <pre>Email Confirmed Successfully<i>You will be redirected in </i>       <span id="counter">      10</span> second(s)</pre>
+            </div>
+            </div>
+            <!-- End bs-wizard -->
+           
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<input type="hidden" value="@returnUrl" id="returnUrl" />
+
+<script type="text/javascript">
+    function countdown() {
+      var returnUrl = $('#returnUrl').val();
+        var i = document.getElementById('counter');
+        if (parseInt(i.innerHTML) <= 0) {
+            location.href = 'RedirectToLogin' + '?' + "returnUrl" + '=' + returnUrl;
+        }
+        if (parseInt(i.innerHTML) != 0) {
+            i.innerHTML = parseInt(i.innerHTML) - 1;
+        }
+    }
+    setInterval(function () { countdown(); }, 1000);
+</script>
+
+
+

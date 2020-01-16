@@ -1,0 +1,299 @@
+﻿@model OnyeijeIgboAcademy.Models.Topic
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Create Topic</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-action="AdminDashboard" asp-controller="Dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-controller="Topics" asp-action="Index">Topics</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Topic</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a asp-action="Index" asp-controller="Topics" class="btn btn-sm btn-neutral">View Topic List</a>
+                    <a asp-action="Create" asp-controller="Courses" class="btn btn-sm btn-neutral">Create Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card-wrapper">
+                    <!-- Input groups -->
+
+                    <div class="card">
+                        <!-- Card header -->
+                        <div class="card-header">
+                            <h3 class="mb-0">Create Topic </h3>
+                        </div>
+                        <!-- Card body -->
+                        <div class="card-body">
+
+                            <!-- Input groups with icon -->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <input asp-for="TopicNumber" class="form-control" placeholder="Topic Code">
+                                            <span asp-validation-for="TopicNumber" class="text-danger"></span>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <input asp-for="Title" class="form-control" placeholder="Topic Title">
+                                            <span asp-validation-for="Title" class="text-danger"></span>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Enable Topic
+                                    <label class="custom-toggle">
+
+                                        <input type="checkbox" asp-for="IsEnabled">
+                                        <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group-prepend">
+                                            <label class="form-control-label" for="exampleFormControlSelect1">Select Module</label>
+                                            <select asp-for="ModuleId" class="form-control" id="exampleFormControlSelect1" asp-items="ViewBag.ModuleId" required>
+                                                <option selected>Please Select</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <br />
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group-prepend">
+                                        <label class="form-control-label" for="exampleFormControlSelect1">Set Topic Position</label>
+                                        <select asp-for="Position" class="form-control" id="exampleFormControlSelect1" required>
+                                            <option selected>Please Select</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                   
+                            <div class="input-group mb-5">
+                                <div class="custom-file">
+                                    Upload topic Video
+                                    <input type="file" asp-for="VideoUrl" style="opacity:1" class="custom-file-input" id="inputGroupFile02" onchange="checkVideo(this), checkDuration(this)" /> <br />
+
+                                </div>
+                                <div id="photoLabel" class="text-danger"></div>
+                                <br />
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group input-group-merge">
+                                        Duration
+                                        <input asp-for="Duration" id="infoss" class="form-control">
+
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="form-group">
+                                <label class="form-control-label" for="exampleFormControlTextarea1">Topic Summary</label>
+                                <textarea asp-for="Summary" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <span asp-validation-for="Summary" class="text-danger"></span>
+                            </div>
+
+                            <br />
+
+                            <div class="form-group">
+                                <label class="form-control-label" for="exampleFormControlTextarea1">Topic Notes</label>
+                                <textarea asp-for="Notes" class="form-control" id="summernote"></textarea>
+                                <span asp-validation-for="Notes" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script>
+    let jdQuill = new Quill('#description', {
+        theme: 'snow'
+    });
+    function handleSubmit() {
+        console.info('handleSubmit called');
+        document.getElementById('jdr').value = jdQuill.root.innerHTML;
+    };
+</script>
+
+@*<script>
+        $("#formButton").change(function(){
+            $("#form1").toggle();
+        });
+    </script>*@
+
+<script>
+    function myFunction() {
+        if ($('#formButton').prop('checked')) {
+            $('#form1').hide();
+        }
+        else {
+            $('#form1').show();
+        }
+    }
+</script>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+
+    <script>
+        function checkVideo(target) {
+            if (target.files[0].type.indexOf("video") == -1) {
+                document.getElementById("photoLabel").innerHTML = "File not supported";
+                return false;
+            }
+            //if (target.files[0].size > 20480) {
+            //    document.getElementById("photoLabel").innerHTML = "Image too big (max 20kb)";
+            //    return false;
+            //}
+
+
+
+
+            document.getElementById("photoLabel").innerHTML = "";
+            return true;
+        }
+    </script>
+    <script>
+        function checkDuration(target) {
+
+            var myVideos = [];
+
+            window.URL = window.URL || window.webkitURL;
+
+            document.getElementById('inputGroupFile02').onchange = setFileInfo;
+
+            function setFileInfo() {
+                var files = this.files;
+                myVideos.push(files[0]);
+                var video = document.createElement('video');
+                video.preload = 'metadata';
+
+                video.onloadedmetadata = function () {
+                    window.URL.revokeObjectURL(video.src);
+                    var duration = video.duration;
+                    $("#infoss").val(duration);
+                    myVideos[myVideos.length - 1].duration = duration;
+                    updateInfos();
+                }
+
+                video.src = URL.createObjectURL(files[0]);;
+            }
+
+
+            function updateInfos() {
+                var infos = document.getElementById('infos');
+
+
+
+                for (var i = 0; i < myVideos.length; i++) {
+                    infos.textContent += myVideos[i].duration + '\n';
+
+                }
+
+            }
+        }
+    </script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
+
+
+
+    <script>
+        $('#summernote').summernote({
+            placeholder: 'Enter Notes for the topic Here,  you can either paste an already formatted word text or use the text format navigation',
+            tabsize: 2,
+            height: 600
+        });
+    </script>
+
+}
+

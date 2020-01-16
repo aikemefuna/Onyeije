@@ -1,0 +1,107 @@
+﻿@model IEnumerable<OnyeijeIgboAcademy.Models.Course>
+@{
+    ViewData["Title"] = "Mazi Ifeanyi Nwosu Igbo Academy | Intermediate Courses";
+    Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
+}
+
+<section id="hero_in" class="courses">
+    <div class="wrapper">
+        <div class="container">
+            <h1 class="fadeInUp"><span></span>Intermediate courses</h1>
+        </div>
+    </div>
+</section>
+<!--/hero_in-->
+<div class="filters_listing sticky_horizontal">
+    <div class="container">
+        <ul class="clearfix">
+            <li>
+                <div class="switch-field">
+                    <input type="radio" id="all" name="listing_filter" value="all" onclick="all()">
+                    <label for="all">All</label>
+                    <input type="radio" id="beginner" name="listing_filter" value="popular" onclick="beginner()">
+                    <label for="beginner">Beginner</label>
+                    <input type="radio" id="intermediate" name="listing_filter" value="latest" checked onclick="intermediate()">
+                    <label for="intermediate">Intermediate</label>
+                    <input type="radio" id="advanced" name="listing_filter" value="advanced" onclick="advanced()">
+                    <label for="advanced">Advanced</label>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <!-- /container -->
+</div>
+<!-- /filters -->
+
+<div class="container margin_60_35">
+    <div class="row">
+        @if (Model.Count() > 0)
+        {
+            @foreach (var course in Model)
+            {
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="box_grid wow">
+                        <figure class="block-reveal">
+                            <div class="block-horizzontal"></div>
+
+                            <a asp-action="CourseDetail" asp-controller="Courses" asp-route-id="@course.CourseId"><img src="~/images/onyeijemedia/logo12.png" class="img-fluid" alt=""></a>
+                            @if (course.IsFree == true)
+                            {
+                                <div class="price">FREE</div>
+                            }
+                            else
+                            {
+                                <div class="price">@course.Cost</div>
+                            }
+
+                            <div class="preview"><span>Preview course</span></div>
+                        </figure>
+                        <div class="wrapper">
+                            <small>Title</small>
+                            <h3>@course.CourseTitle</h3>
+                            <p>@course.Description</p>
+                        </div>
+                        <ul>
+                            <li><pre>Course Duration:  @ViewBag.duration</pre></li>
+
+                            <li><a asp-action="CourseDetail" asp-controller="Courses" asp-route-id="@course.CourseId">Enroll now</a></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h2>O nweghi ihe oge a biko lee ma ghaa emechaa</h2>
+        }
+
+
+        <!-- /box_grid -->
+
+    </div>
+    <!-- /row -->
+
+</div>
+<script>
+         function all() {
+            location.href = '@Url.Action("Courses","Courses")';
+          }
+</script>
+<script>
+    function beginner() {
+        location.href = '@Url.Action("BeginnerCourses","Courses")';
+    }
+</script>
+
+<script>
+      function intermediate() {
+            location.href = '@Url.Action("IntermediateCourses","Courses")';
+        }
+</script>
+
+<script>
+         function advanced() {
+            location.href = '@Url.Action("AdvancedCourses","Courses")';
+        }
+</script>

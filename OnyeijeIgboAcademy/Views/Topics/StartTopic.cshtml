@@ -1,0 +1,244 @@
+﻿
+
+@model OnyeijeIgboAcademy.Models.Topic
+@{
+    ViewData["Title"] = "Enrollments";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    var StudentId = ViewBag.SId;
+
+}
+
+
+<style>
+    #status span.status {
+        display: none;
+        font-weight: bold;
+    }
+
+    span.status.complete {
+        color: green;
+    }
+
+    span.status.incomplete {
+        color: red;
+    }
+
+    #status.complete span.status.complete {
+        display: inline;
+    }
+
+    #status.incomplete span.status.incomplete {
+        display: inline;
+    }
+</style>
+<div class="header header-dark bg-primary pb-6 content__title content__title--calendar">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6">
+                    <h6 class="fullcalendar-title h2 text-white d-inline-block mb-0">@Model.Title</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-lg-inline-block ml-lg-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-action="StudentDashboard" asp-controller="Dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-action="AllCourses" asp-controller="Courses">View Courses</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Enroll for this Course</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<h1 class="text-center" style="font-family:'Lucida Handwriting'; font-size:larger; text-size-adjust:auto">@Model.Title</h1>
+<br />
+<br />
+<div class="container margin_60_35">
+    <div class="row">
+        <aside class="col-md-8" id="sidebar">
+            <div class="box_detail">
+
+                <div class="embed-responsive embed-responsive-16by9 embed-responsive-item; opacity-0">
+                    @*<iframe id="video" class="embed-responsive-item" src="~/videos/@Model.VideoUrl" allowfullscreen></iframe>*@
+                    <video controls="controls" id="video">
+                        <source src="~/videos/@Model.VideoUrl" type="video/mp4" />
+                    </video>
+                </div>
+
+
+                <br />
+                <div id="status" class="incomplete">
+                    <span>Play status: </span>
+                    <span class="status complete">COMPLETE! Please click on the Take quiz button to take a short quiz </span>
+                    <span class="status incomplete">INCOMPLETE</span>
+                    <br />
+                </div>
+                <div>
+                    <span id="played">0</span> seconds out of
+                    <span id="duration"></span> seconds. (only updates when the video pauses)
+                </div>
+            </div>
+        </aside>
+        @if (ViewBag.Nofile == "Yes")
+        {
+    <h3>&nbsp;&nbsp;>>>&nbsp;Sorry no files is available for this topic</h3>
+        }
+        else
+        {
+            <div class="col-md-4">
+                <h5>Click the file name below to download the files</h5>
+                <section id="description">
+                    <ul>
+                        @foreach (var file in ViewBag.TopicFiles)
+                        {
+
+                            <li class="nav-item">
+
+                                <a href="~/topicFiles/@file" download>@file</a>
+                            </li>
+                        }
+                    </ul>
+                </section>
+
+            </div>
+        }
+
+        <!-- /col -->
+
+
+    </div>
+    <br /> <br />
+           <div class="row">
+               <div class="col-md-4">
+                   <button type="button" id="hideshow" class="btn btn-large btn-primary" style="width:auto">Show Topic Notes</button>
+               </div>
+
+               @if (ViewBag.IsCompleted != "Yes")
+               {
+                   <div class="col-md-4">
+                       <form method="post" asp-action="TopicQuiz" asp-controller="Quiz" asp-route-id="@Model.TopicId">
+                           <button type="submit" id="quiz" class="btn btn-large btn-primary" style="width:auto">Take Quiz</button>
+
+                       </form>
+                   </div>
+               }
+
+
+
+
+           </div>
+    <br />
+    <br />
+    <dialog id="notes">
+        @Html.Raw(Model.Notes)
+    </dialog>
+    <!-- /row -->
+</div>
+<input type="hidden" name="TopicId" value="@Model.TopicId" id="TopicId" />
+<input type="hidden" name="TopicId" value="@StudentId" id="StudentId" />
+
+<script>
+    jQuery(document).ready(function () {
+        jQuery('#hideshow').on('click', function (event) {
+            jQuery('#notes').toggle('show');
+            jQuery('#hideshow').innerHTML() = "Hide Topics Note"
+        });
+    });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery('#quiz').hide();
+    });
+</script>
+
+<script>
+    var video = document.getElementById("video");
+
+    var timeStarted = -1;
+    var timePlayed = 0;
+    var duration = 0;
+    // If video metadata is laoded get duration
+    if (video.readyState > 0)
+        getDuration.call(video);
+    //If metadata not loaded, use event to get it
+    else {
+        video.addEventListener('loadedmetadata', getDuration);
+    }
+    // remember time user started the video
+    function videoStartedPlaying() {
+        timeStarted = new Date().getTime() / 1000;
+    }
+    function videoStoppedPlaying(event) {
+        // Start time less then zero means stop event was fired vidout start event
+        if (timeStarted > 0) {
+            var playedFor = new Date().getTime() / 1000 - timeStarted;
+            timeStarted = -1;
+            // add the new ammount of seconds played
+            timePlayed += playedFor;
+        }
+        document.getElementById("played").innerHTML = Math.round(timePlayed) + "";
+        // Count as complete only if end of video was reached
+        if (timePlayed >= duration && event.type == "ended") {
+            document.getElementById("status").className = "complete";
+            jQuery('#quiz').show();
+            MarkTopicCompleted();
+        }
+    }
+    function MarkTopicCompleted() {
+        var Enroll = new Object();
+        Enroll.TopicId = $('#TopicId').val();
+
+
+
+        if (Enroll.TopicId != null) {
+            $.ajax({
+                url: "/Topics/MarkTopicCompleted",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify(Enroll),
+                async: true,
+                contentType: "application/json; charset =utf-8",
+
+                success: function (response) {
+                    if (response != null) {
+                        if (response == true) {
+                            alert("Course Completed Successfully, Please click the Take quiz button to take Topic Quiz. You have been awarded 5 points for completing these topic video");
+                        }
+                        else {
+                            alert("Congratulations for completing this Topic Video. You have previously been awared 5 point for completing same earlier. please press ok to close window.");
+                        }
+
+                    }
+                    else {
+                        alert("Something went wrong");
+                    }
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+
+    }
+    function getDuration() {
+        duration = video.duration;
+        document.getElementById("duration").appendChild(new Text(Math.round(duration) + ""));
+        console.log("Duration: ", duration);
+    }
+
+    video.addEventListener("play", videoStartedPlaying);
+    video.addEventListener("playing", videoStartedPlaying);
+
+    video.addEventListener("ended", videoStoppedPlaying);
+    video.addEventListener("pause", videoStoppedPlaying);
+</script>
+
+<script>
+
+</script>

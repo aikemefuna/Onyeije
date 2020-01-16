@@ -1,0 +1,109 @@
+﻿@model IEnumerable<OnyeijeIgboAcademy.Models.Questions>
+@{
+    ViewData["Title"] = "TopicQuiz";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Create Topic</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-action="AdminDashboard" asp-controller="Dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-controller="Topics" asp-action="Index">Topics</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Topic</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a asp-action="Create" asp-controller="Topics" class="btn btn-sm btn-neutral">Create New</a>
+                    <a asp-action="Create" asp-controller="Courses" class="btn btn-sm btn-neutral">Create Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-wrapper">
+                <!-- Input groups -->
+                @if (Model.Any())
+                {
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <!-- Card header -->
+                            <div class="card-header">
+                                <h3 class="mb-0">@ViewBag.TopicTitle</h3>
+                            </div>
+                            <!-- Card body -->
+                            <div class="card-body">
+                                @foreach (var quest in Model)
+                                {
+                                    <div class="custom-control">
+                                        <h4>@Html.Raw(quest.Question)</h4>
+                                    </div> <br />
+                                    <div class="row">
+
+                                        <h3> <pre>A  </pre> </h3>
+                                        <div class="custom-control custom-radio mb-3">
+                                            <input name="custom-radio-1" class="custom-control-input" id="customRadio5" type="radio">
+                                            <label class="custom-control-label" for="customRadio5">@quest.Option1</label>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <h3> <pre>B  </pre> </h3>
+                                        <div class="custom-control custom-radio mb-3">
+                                            <input name="custom-radio-1" class="custom-control-input" id="customRadio6" type="radio">
+                                            <label class="custom-control-label" for="customRadio6">@quest.Option2</label>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <h3> <pre>C  </pre> </h3>
+                                        <div class="custom-control custom-radio mb-3">
+                                            <input name="custom-radio-1" class="custom-control-input" id="customRadio7" type="radio">
+                                            <label class="custom-control-label" for="customRadio7">@quest.Option3</label>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <h3> <pre>D  </pre> </h3>
+                                        <div class="custom-control custom-radio mb-3">
+                                            <input name="custom-radio-1" class="custom-control-input" id="customRadio8" type="radio">
+                                            <label class="custom-control-label" for="customRadio8">@quest.Option4</label>
+                                        </div>
+                                    </div>
+                                    <br /> <br />
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+              
+                       
+                        }
+                        else
+                        {
+                        <div>
+                            <h2> Sorry no quiz has been set for this topic. please check back agin.</h2>
+                        </div>
+                        }
+                    </div>
+                </div>
+    </div>
+
+
+</div>
+

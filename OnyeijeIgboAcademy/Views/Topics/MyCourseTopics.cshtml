@@ -1,0 +1,125 @@
+﻿@model OnyeijeIgboAcademy.Models.Course
+@{
+    ViewData["Title"] = "MyCourseDetail";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+<div class="header header-dark bg-primary pb-6 content__title content__title--calendar">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6">
+                    <h6 class="fullcalendar-title h2 text-white d-inline-block mb-0">@Model.CourseTitle</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-lg-inline-block ml-lg-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-action="StudentDashboard" asp-controller="Dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-action="MyCourses" asp-controller="Courses">View your Course Subscriptions</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">@Model.CourseTitle</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<h2>
+    <pre>Great! Hope  the course was worth your time 
+    <a asp-action="ReviewCourse" asp-controller="Review" asp-route-id="@Model.CourseId" class="nav-link">click Here</a> to review this Course</pre>
+</h2>
+<br />
+<div class="row">
+    <div class="container-fluid">
+        <h5 style="font-family:'Lucida Handwriting'; font-size:larger; color:blueviolet">Course topics</h5> <br />
+        <div class="row">
+            <div class="col-sm-7">
+
+
+
+                        <div class="card">
+
+                            <div class="card-title">
+                                <h3>View Topics Completed </h3>
+                            </div>
+                            <br />
+                            <br />
+                            <ul>
+                                @foreach (var item in ViewBag.Alltopics)
+                                {
+                                <li>
+
+                                    <h2>
+
+                                        <pre><a asp-action="StartTopic" asp-controller="Topics" asp-route-id="@item.TopicId" class="nav-link">@item.Title</a></pre>
+                                        
+                                    </h2>
+                                </li>
+                                }
+                            </ul>
+
+
+
+
+                        </div>
+
+                 
+            </div>
+
+
+            @*<div class="col-md-5">
+
+                    @if (ViewBag.courseIntro == null)
+                    {
+                    <h5>Course Preview</h5>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" allowfullscreen></iframe>
+                    </div>
+                    }
+                    else
+                    {
+                    <h5>Course Preview</h5>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="~/videos/@ViewBag.courseIntro" allowfullscreen></iframe>
+                    </div>
+                    }
+
+                </div>*@
+            @if (ViewBag.NoFile == "Yes")
+            {
+            <div class="col-md-4">
+                <h5 style="font-family:'Goudy Old Style'; font-size:larger; color:blueviolet">No Course Materials</h5> <br />
+            </div>
+
+
+
+
+            }
+            else
+            {
+            <div class="col-md-3">
+                <h5 style="font-family:'Lucida Handwriting'; font-size:larger; color:blueviolet">Click to download</h5> <br />
+
+                <ul class="nav nav-sm flex-column">
+                    @foreach (var file in ViewBag.Files)
+                        {
+
+                    <li class="nav-item">
+
+                        <a href="~/topicFiles/@file" download>@file</a>
+                    </li>
+                        }
+
+                </ul>
+
+            </div>
+            }
+
+            <!-- /col -->
+        </div>
+        <!-- /row -->
+        <div class="row">
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,144 @@
+﻿@model OnyeijeIgboAcademy.Models.Modules
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Create Module</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-action="AdminDashboard" asp-controller="Dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-controller="Modules" asp-action="Index">Module</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Module</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a asp-action="Create" asp-controller="Topics" class="btn btn-sm btn-neutral">Create Topic</a>
+                    <a asp-action="Create" asp-controller="Courses" class="btn btn-sm btn-neutral">Create Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card-wrapper">
+                    <!-- Input groups -->
+
+                    <div class="card">
+                        <!-- Card header -->
+                        <div class="card-header">
+                            <h3 class="mb-0">Create CourseModules </h3>
+                        </div>
+                        <!-- Card body -->
+                        <div class="card-body">
+
+                            <!-- Input groups with icon -->
+
+                            <div class="row">
+                                <input asp-for="ModuleId" type="hidden" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <input asp-for="ModuleCode" class="form-control" placeholder="Course Code">
+                                            <span asp-validation-for="ModuleCode" class="text-danger"></span>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <input asp-for="Title" class="form-control" placeholder="Course Title">
+                                            <span asp-validation-for="Title" class="text-danger"></span>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br />
+                            <div class="row">
+                                <div class="col-3">
+                                    Enable Course
+                                    <label class="custom-toggle">
+                                        <input type="checkbox" asp-for="IsEnabled">
+                                        <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+
+                                    </label>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group-prepend">
+                                            <label class="form-control-label" for="exampleFormControlSelect1">Select Course</label>
+                                            <select asp-for="CourseId" class="form-control" id="exampleFormControlSelect1" asp-items="ViewBag.CourseId" required>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="form-group">
+                                <label class="form-control-label" for="exampleFormControlTextarea1">Course Description</label>
+                                <textarea asp-for="Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+<script>
+    let jdQuill = new Quill('#description', {
+        theme: 'snow'
+    });
+    function handleSubmit() {
+        console.info('handleSubmit called');
+        document.getElementById('jdr').value = jdQuill.root.innerHTML;
+    };
+</script>
+
+@*<script>
+        $("#formButton").change(function(){
+            $("#form1").toggle();
+        });
+    </script>*@
+
+<script>
+    function myFunction() {
+        if ($('#formButton').prop('checked')) {
+            $('#form1').hide();
+        }
+        else {
+            $('#form1').show();
+        }
+}
+</script>

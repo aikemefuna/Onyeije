@@ -1,0 +1,207 @@
+﻿@model OnyeijeIgboAcademy.Models.Course
+
+@{
+    ViewData["Title"] = "Report | Course Detail Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Course Report</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item" aria-current="page">Course</li>
+                            <li class="breadcrumb-item active" aria-current="page">Course Report</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="row justify-content-around">
+        <h2><u>@Model.CourseTitle Report</u></h2>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header card-header-icon card-header-info">
+                    <div class="card-icon">
+                        <i class="material-icons">insert_chart</i>
+                    </div>
+                    <h4 class="card-title">
+                        Total No. Modules
+                        <strong> - @ViewBag.moduleCount</strong>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div id="colouredRoundedLineChart" class="ct-chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header card-header-icon card-header-primary">
+                    <div class="card-icon">
+                        <i class="material-icons">insert_chart</i>
+                    </div>
+                    <h4 class="card-title">
+                        Total No. Topics
+                        <strong>- @ViewBag.topicCount</strong>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div id="multipleBarsChart" class="ct-chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header card-header-icon card-header-warning">
+                    <div class="card-icon">
+                        <i class="material-icons">insert_chart</i>
+                    </div>
+                    <h4 class="card-title">
+                        Total No. Topic Files
+                        <strong> - @ViewBag.topicFilesCount</strong>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div id="colouredRoundedLineChart" class="ct-chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header card-header-icon card-header-rose">
+                    <div class="card-icon">
+                        <i class="material-icons">insert_chart</i>
+                    </div>
+                    <h4 class="card-title">
+                        Total No. Course Subscription
+                        <strong>- @ViewBag.NoOfSubscription</strong>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div id="multipleBarsChart" class="ct-chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header card-header-icon card-header-rose">
+                    <div class="card-icon">
+                        <i class="material-icons">insert_chart</i>
+                    </div>
+                    <h4 class="card-title">
+                        Total Amount Paid for Course
+                        <strong>509,000</strong>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div id="multipleBarsChart" class="ct-chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+
+            <div class="card">
+                <!-- Card header -->
+                <div class="card-header">
+                    <h3 class="mb-0">Course Reports</h3>
+                    @*<p class="text-sm mb-0">
+                            This is an exmaple of datatable using the well known datatables.net plugin. This is a minimal setup in order to get started fast.
+                        </p>*@
+                </div>
+                <div class="table-responsive py-4">
+                    <table class="table table-flush" id="datatable-buttons">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Course Code</th>
+                                <th>Course Title</th>
+                                <th>Enabled</th>
+                                <th>Amount</th>
+                                <th>Difficulty Level</th>
+                                <th>Date Created</th>
+
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Course Code</th>
+                                <th>Course Title</th>
+
+                                <th>Enabled</th>
+                                <th>Amount</th>
+                                <th>Difficulty Level</th>
+                                <th>Date Created</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr>
+                                <td>  @Model.CourseCode</td>
+                                <td>  @Model.CourseTitle</td>
+
+                                <td>
+                                    @if (Model.IsEnabled == true)
+                                    {
+                                        <button class="btn btn-success">
+                                            <span class="btn-label">
+                                                <i class="nc-icon nc-check-2"></i>
+                                            </span>
+                                            Enabled
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-pinterest">
+                                            <span class="btn-label">
+                                                <i class="nc-icon nc-simple-remove"></i>
+                                            </span> Disabled
+                                        </button>
+                                    }
+                                </td>
+                                <td>
+                                    @if (Model.IsFree == true)
+                                    {
+                                        <button class="btn btn-success">
+                                            <span class="btn-label">
+                                                <i class="nc-icon nc-check-2"></i>
+                                            </span>
+                                            Free
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        @Model.Cost
+                                    }
+                                </td>
+                                <td>
+                                    @Model.DifficultyLevel
+                                </td>
+                                <td>@Model.DateCreated</td>
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

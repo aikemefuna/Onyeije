@@ -1,0 +1,345 @@
+﻿@model OnyeijeIgboAcademy.Models.Course
+@{
+    ViewData["Title"] = "Enrollments";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    var studentId = ViewBag.studentId;
+    var key = ViewBag.Key;
+    var title = ViewBag.CourseTitle;
+    var email = ViewBag.payerEmail;
+    var Amount = ViewBag.CourseAmount;
+    var transId = ViewBag.TransId;
+    var courseId = ViewBag.courseId;
+
+}
+<link href="~/css/style.css" rel="stylesheet">
+<link href="~/css/vendors.css" rel="stylesheet">
+<link href="~/css/icon_fonts/css/all_icons.min.css" rel="stylesheet">
+
+<!-- YOUR CUSTOM CSS -->
+<link href="~/css/custom.css" rel="stylesheet">
+<link href="~/css/skins/square/grey.css" rel="stylesheet">
+<link href="~/css/wizard.css" rel="stylesheet">
+<!-- MODERNIZR SLIDER -->
+<script src="~/js/modernizr_slider.js"></script>
+<div class="header header-dark bg-primary pb-6 content__title content__title--calendar">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6">
+                    <h6 class="fullcalendar-title h2 text-white d-inline-block mb-0">Enroll for this Course</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-lg-inline-block ml-lg-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-action="StudentDashboard" asp-controller="Dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-action="AllCourses" asp-controller="Courses">View Courses</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Enroll for this Course</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@*
+    <div class="container-fluid mt--6">
+        <div class="row card-wrapper">
+
+            <div class="col-lg-12">
+                <!-- Pricing -->
+                <div class="card card-pricing bg-gradient-success border-0 text-center mb-4">
+                    <div class="card-header bg-transparent">
+                        <h4 class="text-uppercase ls-1 text-white py-3 mb-0">@Model.CourseTitle</h4>
+                    </div>
+                    <div class="card-body px-lg-7">
+                        @if (Model.IsFree != true)
+                        {
+                            <div class="display-2 text-white">Discounted Prize @Model.Cost</div>
+                            <span class=" text-white">Former Prize 30000</span>
+
+
+                        }
+                        else
+                        {
+                            <div class="display-2 text-white">FREE</div>
+
+                        }
+                        <ul class="list-unstyled my-4">
+                            <li>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="icon icon-xs icon-shape bg-white shadow rounded-circle">
+                                            <i class="fas fa-terminal"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="pl-2 text-sm text-white">Complete documentation</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="icon icon-xs icon-shape bg-white shadow rounded-circle">
+                                            <i class="fas fa-pen-fancy"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="pl-2 text-sm text-white">Course Materials Available</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="icon icon-xs icon-shape bg-white shadow rounded-circle">
+                                            <i class="fas fa-hdd"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="pl-2 text-sm text-white">2GB cloud storage</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <a asp-action="Enroll" asp-controller="Enrollment" asp-route-id="@Model.CourseId" class="btn btn-primary mb-3">Enroll now</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+*@
+<br />
+<br />
+
+<div class="container margin_60_35">
+    <div class="row">
+        <div class="col-lg-8">
+
+            <section id="description">
+                <h2>Description</h2>
+                <p>@Html.Raw(Model.Description)</p>
+                <h5>What will you learn</h5>
+                <ul class="list_ok">
+                    @foreach (var module in ViewBag.moduleDescription)
+                    {
+                        <li>
+
+                            <p>@module</p>
+                        </li>
+                    }
+
+
+                </ul>
+                <hr>
+
+            </section>
+
+        </div>
+        <!-- /col -->
+
+        <aside class="col-lg-4" id="sidebar">
+            <div class="box_detail">
+                <figure>
+                    <i class="arrow_triangle-right"></i><img src="~/uploads/@Model.ImageUrl" alt="" class="img-fluid"><span>View course preview</span>
+                </figure>
+                @if (Model.IsFree != true)
+                {
+                    <div class="price">
+                        @Model.Cost
+                    </div>
+                }
+                else
+                {
+                    <div class="price">
+                        FREE
+                    </div>
+                }
+                @{
+                    if (ViewBag.Enrolled == "Yes")
+                    {
+                        <a href="#" class="btn_1 full-width">You are enrolled already</a>
+                    }
+                    else
+                    {
+
+                        if (Model.IsFree != true)
+                        {
+                            <a class="btn_1 full-width" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pay Now</a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                              
+
+                                <form method="post">
+                                    <button type="button" onclick="btnPost()" class="dropdown-item"> Pay </button>
+                                </form>
+                                
+                          
+                            </div>
+                        }
+                        else
+                        {
+                            <a asp-action="Enroll" asp-controller="Enrollment" asp-route-id="@Model.CourseId" class="btn_1 full-width">Enroll</a>
+                        }
+                    }
+                }
+                <div id="list_feat">
+                    <h3>What's included</h3>
+                    <ul>
+                        <li><i class="icon_mobile"></i>Mobile support</li>
+                        <li><i class="icon_archive_alt"></i>Lesson archive</li>
+                        <li><i class="icon_chat_alt"></i>Tutor chat</li>
+                        <li><i class="icon_document_alt"></i>Course certificate (Coming Soon)</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- /row -->
+</div>
+
+<input type="hidden" name="key" id="Key" value="@key" />
+<input type="hidden" name="studentId" id="studentId" value="@studentId" />
+<input type="hidden" name="courseId" id="courseId" value="@courseId" />
+<input type="hidden" name="Amount" id="Amount" value="@Amount" />
+<input type="hidden" name="TransId" id="TransId" value="@transId" />
+<input type="hidden" name="Email" id="Email" value="@email" />
+<input type="hidden" name="Title" id="Title" value="@title" />
+
+
+
+
+<!=============Button===================!>
+
+<!============------====================!>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="~/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script>
+    var Transactions = new Object();
+    Transactions.RefID = $('#TransId').val();
+    Transactions.PayerEmail = $('#Email').val();
+    Transactions.PaymentName = $('#Title').val();
+    Transactions.PaymentStatus = "";
+    Transactions.Amount = $('#Amount').val();
+    function btnPost() {
+            $.ajax({
+                url: "/Enrollment/CoursePayment",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify(Transactions),
+                async: true,
+                contentType: "application/json; charset =utf-8",
+
+                success: function (response) {
+                    if (response != null) {
+                        //alert("Data Saved Successfully");
+                        payWithPaystack();
+                    }
+                    else {
+                        alert("Some went wrong");
+                    }
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+    }
+    function payWithPaystack() {
+
+            var handler = PaystackPop.setup({
+                key: $('#Key').val(),
+                email: $('#Email').val(),
+                amount: $('#Amount').val() * 100,
+                currency: "NGN",
+
+                ref: $('#TransId').val(),
+
+
+                callback: function (response ) {
+                    alert('success. your enrollment is been processed transaction ref is ' + response.reference);
+                    success: {
+
+                    paymentstatus();
+                    }
+                },
+                onClose: function () {
+                    alert('window closed');
+                }
+            });
+            handler.openIframe();
+
+    }
+    function paymentstatus() {
+            var RefID =  $('#TransId').val();
+            if (RefID != null) {
+                $.ajax({
+                    url: "/Enrollment/UpdateCoursePayment",
+                    type: "POST",
+                    dataType: "json",
+                    data: JSON.stringify(RefID),
+                    async: true,
+                    contentType: "application/json; charset =utf-8",
+
+                    success: function (response) {
+                        if (response != null) {
+                            CourseEnrollment();
+                            //alert("Transaction Successfull");
+                            //window.location.href = "/Dashboard/Index";
+                        }
+                        else {
+                            alert("Some went wrong");
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+
+    }
+    function CourseEnrollment() {
+        var Enroll = new Object();
+        Enroll.StudentId = $('#studentId').val();
+        Enroll.CourseId = $('#courseId').val();
+        Enroll.AmountPaid = $('#Amount').val();
+        Enroll.TransId = $('#TransId').val();
+
+        if (Enroll.TransId != null) {
+            $.ajax({
+                url: "/Enrollment/CourseEnrollement",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify(Enroll),
+                async: true,
+                contentType: "application/json; charset =utf-8",
+
+                success: function (response) {
+                    if (response != null) {
+                        alert("Enrollment was successful, you would be redirected to your dashboard to view course and begin lessons.");
+                        window.location.href = "/Dashboard/StudentDashboard";
+                    }
+                    else {
+                        alert("Some went wrong");
+                    }
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+
+    }
+</script>

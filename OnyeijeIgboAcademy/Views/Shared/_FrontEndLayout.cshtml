@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Udema a modern educational site template">
+    <meta name="author" content="Ansonika">
+    <title>Onyeije | Mazi Ifeanyi Nwosu igbo Academy</title>
+
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+
+    <!-- GOOGLE WEB FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+
+    <!-- BASE CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/vendors.css" rel="stylesheet">
+    <link href="~/css/icon_fonts/css/all_icons.min.css" rel="stylesheet">
+
+    <!-- YOUR CUSTOM CSS -->
+    <link href="~/css/custom.css" rel="stylesheet">
+    <link href="~/css/skins/square/grey.css" rel="stylesheet">
+    <link href="~/css/wizard.css" rel="stylesheet">
+    <!-- MODERNIZR SLIDER -->
+    <script src="~/js/modernizr_slider.js"></script>
+    <style>
+        .logo{
+            width: 100%;
+            height: auto!important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="page">
+
+        <header class="header menu_2">
+            <div id="preloader"><div data-loader="circle-side"></div></div><!-- /Preload -->
+            @*<div id="logo">
+                <a asp-action="Index" asp-controller="Home"><img src="~/images/onyeijemedia/coollogo_com-11655827.gif" width="190" height="34"  data-retina="true" alt="" asp-append-version="true"></a>
+
+            </div>*@
+            <ul id="top_menu">
+
+                <li class="hidden_tablet"><a asp-action="Login" asp-controller="Account" class="btn_1 rounded">Login/Register</a></li>
+            </ul>
+            <!-- /top_menu -->
+            <a href="#menu" class="btn_mobile">
+                <div class="hamburger hamburger--spin" id="hamburger">
+                    <div class="hamburger-box">
+                        <div class="hamburger-inner"></div>
+                    </div>
+                </div>
+            </a>
+            <nav id="menu" class="main-menu">
+                <ul>
+                    <li>
+                        <span><a asp-action="Index" asp-controller="Home">Home</a></span>
+
+                    </li>
+                    <li>
+                        <span><a href="#0">Courses</a></span>
+                        <ul>
+                            <li><a asp-controller="Courses" asp-action="Courses">View All Courses</a></li>
+                            <li><a asp-controller="Courses" asp-action="BeginnerCourses">Beginner Igbo Courses</a></li>
+                            <li><a asp-controller="Courses" asp-action="IntermediateCourses">intermediate igbo Courses</a></li>
+                            <li><a asp-controller="Courses" asp-action="AdvancedCourses">Advanced Igbo Courses</a></li>
+                            <li><a asp-controller="Courses" asp-action="FreeCourses">Free Courses</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <span><a href="http://www.mazinwosublog.com">Blog</a></span>
+
+                    </li>
+                    <li>
+                            <span><a asp-action="Login" asp-controller="Account" > Login/Register</a></span>
+
+                        </li>
+                </ul>
+            </nav>
+
+        </header>
+        <!-- /header -->
+
+        <main>
+
+            <!-- /slider -->
+
+
+            @RenderBody()
+
+            @if (IsSectionDefined("Scripts"))
+            {
+                @RenderSection("Scripts", required: true)
+
+            }
+            <!--/call_section-->
+        </main>
+        <!-- /main -->
+
+        <footer>
+            <div class="container margin_120_95">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12 p-r-5">
+                        <p><img src="~/images/onyeijemedia/coollogo_com-11655827.gif" width="190" height="34" data-retina="true" alt="" asp-append-version="true"></p>
+                        <p>Mazi Ifeanyi Nwosu Igbo Academy. Muta asusu igbo ngwa ngwa na inwe nkpa</p>
+                        <div class="follow_us">
+                            <ul>
+                                <li>Follow us</li>
+                                <li><a href="#"><img src="~/images/onyeijemedia/fb2.png" style="width:20px;height:20px;" /></a></li>
+                                <li><a href="#"><img src="~/images/onyeijemedia/twitter2.png" style="width:20px;height:20px;" /></a></li>
+                                <li><a href="#"><img src="~/images/onyeijemedia/google2.png" style="width:20px;height:20px;" /></a></li>
+
+                                <li><a href="#"><img src="~/images/onyeijemedia/instagram2.png" style="width:20px;height:20px;" /></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 ml-lg-auto">
+                        <h5>Useful links</h5>
+                        <ul class="links">
+
+                            <li><a href="#0">About</a></li>
+
+                            <li><a href="#0">blog</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5>Contact with Us</h5>
+                        <ul class="contacts">
+                            <li><a href="tel://08033170310"><i class="ti-mobile"></i> +23480 331 70310</a></li>
+                            <li><a href="mailto:mazionyeije@gmail.com"><i class="ti-email"></i> mazionyeije@gmail.com</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <!--/row-->
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        <ul id="additional_links">
+                            <li><a href="#0">Terms and conditions</a></li>
+                            <li><a href="#0">Privacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="copy">© 2020 Thokem DevOps</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--/footer-->
+    </div>
+    <!-- page -->
+    <!-- COMMON SCRIPTS -->
+    <script src="~/js/jquery-2.2.4.min.js"></script>
+    <script src="~/js/common_scripts.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="assets/validate.js"></script>
+
+    <!-- FlexSlider -->
+    <script src="~/js/jquery-ui-1.8.22.min.js"></script>
+    <script src="~/js/jquery.wizard.js"></script>
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/admission_func.js"></script>
+    <script defer src="~/js/jquery.flexslider.js"></script>
+    <script>
+        $(window).load(function () {
+            'use strict';
+            $('#carousel_slider').flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                itemWidth: 280,
+                itemMargin: 25,
+                asNavFor: '#slider'
+            });
+            $('#carousel_slider ul.slides li').on('mouseover', function () {
+                $(this).trigger('click');
+            });
+            $('#slider').flexslider({
+                animation: "fade",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                sync: "#carousel_slider",
+                start: function (slider) {
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

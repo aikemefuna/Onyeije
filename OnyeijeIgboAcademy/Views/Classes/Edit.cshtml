@@ -1,0 +1,122 @@
+﻿@model OnyeijeIgboAcademy.Models.Class
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Create Class</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-controller="Classes" asp-action="Index">Classes</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Class</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a asp-action="Create" asp-controller="Courses" class="btn btn-sm btn-neutral">Create Course</a>
+                    <a asp-action="Create" asp-controller="Instructors" class="btn btn-sm btn-neutral">Create Instructors</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card-wrapper">
+                    <!-- Input groups -->
+                    <div class="card">
+                        <!-- Card header -->
+                        <div class="card-header">
+                            <h3 class="mb-0">Class Module</h3>
+                        </div>
+                        <!-- Card body -->
+                        <div class="card-body">
+
+                            <div class="row">
+                                <input asp-for="ClassId" type="hidden" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                            <input asp-for="ClassName" class="form-control" placeholder="Class Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group-prepend">
+                                            <label class="form-control-label" for="exampleFormControlSelect1">Select Course</label>
+                                            <select asp-for="CourseId" class="form-control" id="exampleFormControlSelect1" asp-items="ViewBag.CourseId" required>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row input-daterange datepicker align-items-center">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Start date</label>
+                                        <input asp-for="StartDate" class="form-control" placeholder="Start date" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-control-label">End date</label>
+                                        <input asp-for="EndDate" class="form-control" placeholder="End date" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div asp-validation-summary="All"></div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <button class="btn btn-primary" type="submit">Submit form</button>
+    </form>
+</div>
+<script>
+    let jdQuill = new Quill('#description', {
+        theme: 'snow'
+    });
+    function handleSubmit() {
+        console.info('handleSubmit called');
+        document.getElementById('jdr').value = jdQuill.root.innerHTML;
+    };
+</script>
+
+@*<script>
+        $("#formButton").change(function(){
+            $("#form1").toggle();
+        });
+    </script>*@
+
+<script>
+    function myFunction() {
+        if ($('#formButton').prop('checked')) {
+            $('#form1').hide();
+        }
+        else {
+            $('#form1').show();
+        }
+}
+</script>

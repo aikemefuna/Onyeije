@@ -1,0 +1,113 @@
+﻿@model OnyeijeIgboAcademy.Models.Instructor
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Create Instructor</h6>
+                    <nav aria-label="breaumdcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-action="AdminDashboard" asp-controller="Dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-action="Index">View Instructors</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Instructors</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a href="#" class="btn btn-sm btn-neutral">Assign Course to Instructor</a>
+                    <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col">
+            <div class="card-wrapper">
+                <!-- Custom form validation -->
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header">
+                        <h3 class="mb-0">Create Instructors</h3>
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body">
+
+                        <form method="post" asp-action="Edit" asp-controller="Instructors">
+
+                            <div class="form-row">
+                                <input type="hidden" asp-for="InstructorId" />
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-control-label" for="validationCustom01">First name</label>
+                                    <input asp-for="FirstName" class="form-control" placeholder="First name">
+                                    <div class="valid-feedback">
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-control-label" for="validationCustom02">Last name</label>
+                                    <input asp-for="SurName" class="form-control" placeholder="Last name">
+                                    <div>
+                                        <span asp-validation-for="SurName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-control-label" for="validationCustom02">Phone</label>
+                                    <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number">
+                                    <div>
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-control-label" for="validationCustom03">Email</label>
+                                    <input asp-for="Email" class="form-control" placeholder="Email" />
+                                    <div>
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-control-label" for="validationCustom04">Password</label>
+                                    <input asp-for="Password" class="form-control" placeholder="Password">
+                                    <div>
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-control-label" for="validationCustom05">Confirm Password</label>
+                                    <input asp-for="ComfirmPassword" class="form-control" placeholder="Confirm Password">
+                                    <div>
+                                        <span asp-validation-for="ComfirmPassword" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input class="custom-control-input" id="invalidCheck" type="checkbox" value="" required>
+                                        <label class="custom-control-label" for="invalidCheck">Agree to terms and conditions</label>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting.
+                                        </div>
+                                    </div>
+                                </div>*@
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
